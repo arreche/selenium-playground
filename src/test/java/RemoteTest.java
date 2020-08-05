@@ -1,5 +1,6 @@
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -28,6 +29,7 @@ public class RemoteTest {
             driver.quit();
     }
 
+    @Ignore
     @Test
     public void test() {
         driver.get("https://google.com");

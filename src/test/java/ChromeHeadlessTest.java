@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
+import static org.junit.Assert.assertEquals;
+
 public class ChromeHeadlessTest {
 
     private WebDriver driver;
@@ -19,8 +21,11 @@ public class ChromeHeadlessTest {
     @Before
     public void setupTest() {
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--headless");
         options.addArguments("--disable-gpu");
+        options.addArguments("window-size=1920,1080"); // Workaround to avoid the failure: element not interactable
         driver = new ChromeDriver(options);
     }
 
@@ -33,8 +38,7 @@ public class ChromeHeadlessTest {
     @Test
     public void test() {
         driver.get("https://google.com");
-        String title = driver.getTitle();
-        System.out.println(title);
+        assertEquals("Google", driver.getTitle());
     }
 
 }
